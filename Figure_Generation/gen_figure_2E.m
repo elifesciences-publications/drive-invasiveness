@@ -7,7 +7,7 @@ cm = brewermap(4,'Reds');
 
 data_directory = '../Data_Storage/Figure_2E/';
 
-n = 10; % simulations
+n = 10000; % simulations
 m_arr = logspace(-5, log10(0.5), 51)';
 esc_pop_arr = (1:4)';
 

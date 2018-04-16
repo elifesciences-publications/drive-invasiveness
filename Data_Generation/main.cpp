@@ -31,16 +31,16 @@ int main(int argc, char *argv[]) {
     // Each function below runs code which generates data for the indicated figures,
     // numbered in the order that they're found in the text. Comment lines out if
     // you'd like to generate data for only some particular figures.
-    generate_data_fig_2D(directory);
-    generate_data_fig_2E(directory);
-    generate_data_fig_3(directory);
-    generate_data_fig_4(directory);
-    generate_data_fig_5(directory);
-    generate_data_fig_6(directory);
-    generate_data_fig_7_left(directory);
-    generate_data_fig_7_right(directory);
-    generate_data_fig_8(directory);
-    generate_data_fig_9(directory);
+    generate_data_fig_2D(directory);        // Takes about 30 hours
+    generate_data_fig_2E(directory);        // Takes about 12 hours
+    generate_data_fig_3(directory);         // Takes about 3 hours
+    generate_data_fig_4(directory);         // Takes about 2 hours
+    generate_data_fig_5(directory);         // Takes about 2 hours
+    generate_data_fig_6(directory);         // Takes about 2 hours
+    generate_data_fig_7_left(directory);    // Takes about 3 hours
+    generate_data_fig_7_right(directory);   // Takes about 3 hours
+    generate_data_fig_8(directory);         // Takes about 4 hours
+    generate_data_fig_9(directory);         // Takes about 2 hours
 
     // Return
     return 0;

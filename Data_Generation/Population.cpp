@@ -34,19 +34,60 @@ Population::Population( const Population& other )
 }
 
 void Population::GenInitialVec() {
-    m_vec[0] = m_a.N - m_a.i - m_a.r;
-    m_vec[1] = 0;
-    m_vec[2] = 0;
-    m_vec[3] = m_a.i;
-    m_vec[4] = 0;
-    m_vec[5] = m_a.r;
+
+    // Generates a vector representing the initial population state.
+    // Counts for genotypes are indicated by the entries as indicated.
+
+    m_vec[0] = m_a.N - m_a.i - m_a.r;   // WW individual count
+    m_vec[1] = 0;                       // WD
+    m_vec[2] = 0;                       // WR
+    m_vec[3] = m_a.i;                   // DD
+    m_vec[4] = 0;                       // DR
+    m_vec[5] = m_a.r;                   // RR
+}
+
+void Population::Update() {
+
+    // This function performs a single "standard" reproduction event.
+    // (i.e., no selfing and one offspring per reproduction event.)
+
+    double x[6] = {0, 0, 0, 0, 0, 0};
+    double tempPop[6];
+    memcpy(tempPop,m_vec,6*sizeof(double));
+
+    // Pick first mate
+    EMult(m_vec, m_a.BirthRates, x);    // x is m_pop .* birth rates
+    Normalize(x);                       // x is reproduction probs
+    int ind1 = IdxFromProbs(x);
+    tempPop[ind1]--;
+
+    // Pick second mate
+    EMult(tempPop, m_a.BirthRates, x);
+    Normalize(x);
+    int ind2 = IdxFromProbs(x);
+    tempPop[ind2]--;
+
+    // Calculate offspring
+    int ofsp = IdxFromProbs(m_a.MatingTbl[ind1][ind2]);
+
+    // Choose individual for removal
+    EMult(tempPop, m_a.DeathRates, x);    // x is tempPop .* death rates
+    Normalize(x);                         // x is death probs
+    int rem = IdxFromProbs(x);
+
+    // Update the population vector
+    m_vec[rem]--;
+    m_vec[ofsp]++;
+
+    // Figure out whether we're done or should keep updating
+    UpdateStatus();
+
 }
 
 void Population::UpdateBS() {
 
     // This function performs a single population update if the number of
     // offspring per reproduction is specified to be greater than one.
-    // Otherwise the function Population::Update() performs the updating.
 
     double x[6] = {0, 0, 0, 0, 0, 0};
     double tempPop[6];
@@ -93,8 +134,7 @@ void Population::UpdateBS() {
 void Population::UpdateInbreeding() {
 
     // This function performs a single population update if there is a
-    // nonzero selfing probability. Otherwise the function Population::Update()
-    // performs the updating.
+    // nonzero selfing probability.
 
     double x[6] = {0, 0, 0, 0, 0, 0};
     double tempPop[6];
@@ -135,44 +175,7 @@ void Population::UpdateInbreeding() {
 
 }
 
-void Population::Update() {
-
-    // This function performs a single reproduction event.
-    
-    double x[6] = {0, 0, 0, 0, 0, 0};
-    double tempPop[6];
-    memcpy(tempPop,m_vec,6*sizeof(double));
-    
-    // Pick first mate
-    EMult(m_vec, m_a.BirthRates, x);    // x is m_pop .* birth rates
-    Normalize(x);                       // x is reproduction probs
-    int ind1 = IdxFromProbs(x);
-    tempPop[ind1]--;
-    
-    // Pick second mate
-    EMult(tempPop, m_a.BirthRates, x);
-    Normalize(x);
-    int ind2 = IdxFromProbs(x);
-    tempPop[ind2]--;
-    
-    // Calculate offspring
-    int ofsp = IdxFromProbs(m_a.MatingTbl[ind1][ind2]);
-    
-    // Choose individual for removal
-    EMult(tempPop, m_a.DeathRates, x);    // x is tempPop .* death rates
-    Normalize(x);                         // x is death probs
-    int rem = IdxFromProbs(x);
-
-    // Update the population vector
-    m_vec[rem]--;
-    m_vec[ofsp]++;
-    
-    // Figure out whether we're done or should keep updating
-    UpdateStatus();
-    
-}
-
-void Population::RemoveIndividual(int genotype){
+void Population::RemoveIndividual(int genotype) {
     m_vec[genotype]--;
     UpdateStatus();
 }

@@ -5,7 +5,6 @@ addpath(genpath('Plotting Utilities/'))
 folder = '../Data_Storage/Figure_3/';
 fnames = dir(folder);
 
-% Names are of the form: MaxFreqDist_N_1000_i_1.csv
 [N_arr, i_arr] = get_variable_vals(fnames);
 N_arr(N_arr == 100) = [];
 

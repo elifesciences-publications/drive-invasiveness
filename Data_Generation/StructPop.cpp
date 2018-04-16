@@ -58,12 +58,11 @@ StructPop::StructPop(int subpops, int subpop_size, int initial_drives,
 
 void StructPop::Update() {
 
-    // This function performs a single step of the multiple-population
-    // process.
+    // This function performs a single step of the multiple-population process.
 
     double r = m_uniformDist(*m_engine);
 
-    // Note that We skip reproduction events if the state of the population cannot
+    // Note that we skip reproduction events if the state of the population cannot
     // change via reproductions, since this drastically speeds up the calculations.
     // For example, an allele is fixed in each subpopultion, but no allele is
     // fixed globally. This is exactly correct for calculations where all we

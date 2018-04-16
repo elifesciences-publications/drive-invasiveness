@@ -38,7 +38,7 @@ void StructPopSim::InvasionProbability(int index, std::mt19937 *engine, std::str
     // This function generates data for Figure 2E.
 
     // Specify the parameters for the figure
-    int simulations = 1000;
+    int simulations = 10000;
     double q = 1;
     const int dim1 = 4;
     const int dim2 = 51;
@@ -170,6 +170,9 @@ void StructPopSim::EscapeProbability(int index, std::mt19937 *engine, std::strin
 
         // Save the results
         SaveArray(oss.str(), escapeProbArr, 1, dim2);
+
+        // Display progress
+        std::cout << "Done with " << j+1 << " out of " << dim2 << " migration rate values." << std::endl;
     }
 }
 

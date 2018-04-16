@@ -19,7 +19,7 @@ end
 m_arr = logspace(-5,log10(0.5),size(prob_arr,2));
 P_arr = linspace(0,1,size(prob_arr,1));
 
-cm = brewermap(100,'Reds');
+cm = brewermap(50,'Reds');
 
 % f = gcf;
 f=figure('position',[856   413   306   222]);
