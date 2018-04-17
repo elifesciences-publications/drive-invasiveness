@@ -1,3 +1,0 @@
-/Users/cnoble/Dropbox/Stochastic Gene Drive/Safeguards paper/eLife Code/Data_Generation/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/cnoble/Dropbox/Stochastic Gene Drive/Safeguards paper/eLife Code/Data_Generation/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/cnoble/Dropbox/Stochastic Gene Drive/Safeguards paper/eLife Code/Data_Generation/cmake-build-debug/CMakeFiles/MoranDrive.dir
