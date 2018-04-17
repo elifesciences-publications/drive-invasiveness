@@ -3,6 +3,7 @@ function [ ] = gen_figure_2C( )
 addpath(genpath('Plotting Utilities/'))
 addpath('Simulation Functions/')
 
+% Simulation parameters
 m_arr = [10^-1, 10^-2, 10^-3, 10^-4];
 subpops = 5;
 P       = 0.5;
@@ -10,6 +11,7 @@ i_0     = 15;
 N       = 500;
 sims    = 1;
 
+% Run one simulation for each migration rate
 store_cell_cell = cell(length(m_arr),1);
 max_len = 100;
 for i = 1:length(m_arr)
@@ -20,6 +22,7 @@ for i = 1:length(m_arr)
     end
 end
 
+% Plot the simulations
 close all
 clrs = brewermap(subpops,'Reds');
 figure('position',[855   319   349   262]);
@@ -30,6 +33,7 @@ for i = 1:length(m_arr)
     single_plot(ha(i), clrs, store_cell_cell{i}, N, max_len)
 end
 
+% Set scaling of y axes so they all match
 yl_max = 0;
 for i = 1:length(m_arr)
     yl = get(ha(i),'ylim');
@@ -45,7 +49,7 @@ xlabel('Time (generations)')
 
 end
 
-function [ ] = single_plot(ax, clrs, store_cell, N, max_len)
+function [] = single_plot(ax, clrs, store_cell, N, max_len)
 
 vec = store_cell{1};
 
@@ -55,7 +59,8 @@ len = size(vec,3);
 xvals = (0:len-1) / N;
 xinterp = 0:0.1:max(xvals);
 
-% rank the simulations in order of their timing
+% Rank the simulations in order of their timing, so we
+% can assign colors to each
 rank_arr = zeros(size(vec,2),1);
 for i = 1:size(vec,2)
     D = squeeze(vec(2,i,:));
@@ -64,6 +69,9 @@ for i = 1:size(vec,2)
 end
 [~, idxs] = sort(rank_arr,'ascend');
 
+% Interpolate the frequency traces to one point per 
+% generation so that the pdf is a more manageable size
+% (cutting down the number of points by a factor of N)
 for i = 1:size(vec,2)
     D = squeeze(vec(2,i,:));
     total = squeeze(sum(vec(:,i,:),1));

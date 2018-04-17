@@ -1,6 +1,7 @@
 function [ ] = gen_figure_1E_and_F( )
 
 addpath(genpath('Plotting Utilities'))
+addpath('Simulation Functions/')
 
 % Specify the directory where the data can be found
 save_dir = '../Data_Storage/Figure_1E_and_1F/';
@@ -15,9 +16,9 @@ P_arr = [0.15, 0.5, 0.9];                   % Homing efficiencies
 i_max = 10;                                 % Maximum value on the x-axis
 generate_data(save_dir, P_arr, i_max);      % Generate data, if not done
 
+% Make the figure; specify appearance parameters
 close all; figure('position',[768   324   371   253]);
 tight_subplot(1,1,1,[0.15,0.05],[0.11,0.03]); hold on
-
 clr = brewermap(8,'RdBu');
 c1 = clr(1,:);
 lw = 1;

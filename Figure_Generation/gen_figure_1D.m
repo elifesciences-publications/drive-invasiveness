@@ -2,25 +2,27 @@ function [ ] = gen_figure_1D( )
 
 addpath(genpath('Plotting Utilities'))
 
-% Will run 1000 simulations for each of three different scenarios:
+% Run 1000 simulations for each of three different scenarios:
 %   P = 0.15
 %   P = 0.5
 %   P = 0.9
 %
-% Then will plot the allele frequencies, showing deterministic results,
-% mean of simulations, and 50% confidence regions.
+% Then plot the allele frequencies, showing deterministic results,
+% means of simulations, and 50% confidence regions.
 % 
 % Assuming release size of 15 for each scenario.
 
 % In each of the below, "a" is a struct holding the parameters, and "c" is
-% a cell storing trajectories for each of the simulations
+% a cell array storing full trajectories for each of the simulations
 [a1, c1] = moran_wm(15, 0.15, 1000, 80, 'full');
 [a2, c2] = moran_wm(15, 0.50, 1000, 80, 'full');
 [a3, c3] = moran_wm(15, 0.90, 1000, 80, 'full');
 
+% Make the figure
 figure('position',[509   336   695   224], 'color', 'w');
 axs = tight_subplot(1,3,0.05,[0.18,0.05],[0.06,0.02]);
 
+% Plot each of the panels separately
 plot_simulations_dist(a1,c1,axs(1));
 plot_simulations_dist(a2,c2,axs(2)); set(gca,'ylabel',[])
 plot_simulations_dist(a3,c3,axs(3)); set(gca,'ylabel',[])
