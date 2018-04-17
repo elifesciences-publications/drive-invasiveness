@@ -1,6 +1,7 @@
 function [ ] = gen_figure_1B( )
 
 addpath(genpath('Plotting Utilities'))
+addpath(genpath('Simulation Functions'))
 
 % Load colors from brewermap
 clr = brewermap(3,'Reds');

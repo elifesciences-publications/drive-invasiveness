@@ -17,7 +17,7 @@ i_max = 10;                                 % Maximum value on the x-axis
 generate_data(save_dir, P_arr, i_max);      % Generate data, if not done
 
 % Make the figure; specify appearance parameters
-close all; figure('position',[768   324   371   253]);
+close all; figure('position',[512   324   371   253]);
 tight_subplot(1,1,1,[0.15,0.05],[0.11,0.03]); hold on
 clr = brewermap(8,'RdBu');
 c1 = clr(1,:);
@@ -28,8 +28,11 @@ lw = 1;
 plot(1:i_max, md, 's-', 'color', c1, 'linewidth', lw, 'markerfacecolor', c1)
 set(gca,'tickdir','out')
 set(gca,'ticklength',[0.015, 0.025])
-set(gca,'yminortick','on')
+set(gca,'yminortick','off')
 set(gca,'xtick',1:i_max)
+set(gca,'yticklabelmode','auto')
+set(gca,'xticklabelmode','auto')
+set(gca,'fontsize',11)
 
 % Now make the line plots
 make_line_plots(save_dir, P_arr, i_max, clr(3:-1:1,:), lw);
@@ -70,19 +73,20 @@ for p = 1:length(P_arr)
     end
 end
 
-figure('position',[ 768   324   371   253]);
+figure('position',[882   325   371   253]);
 tight_subplot(1,1,1,[0.15,0.05],[0.11,0.03]); hold on
 for p = 1:length(P_arr)
-    plot(1:i_max, arr_mean(:,p), '.-', 'color', clrs(p,:), 'linewidth', lw, 'markersize', 18)
-    plot(1:i_max, arr_med(:,p), 's:', 'color', clrs(p,:), 'linewidth', lw, 'markerfacecolor', clrs(p,:))
+    plot(1:i_max, arr_med(:,p), 'o-', 'color', clrs(p,:), 'linewidth', lw, 'markerfacecolor', clrs(p,:))
 end
 
-xlabel('Release size')
-ylabel('Maximum drive frequency')
+xlabel('Organisms released')
+ylabel('Median peak drive')
 set(gca,'box','off')
 set(gca,'ticklength',[0.015, 0.025])
 set(gca,'yminortick','on')
 set(gca,'tickdir','out')
+set(gca,'yticklabelmode','auto')
+set(gca,'xticklabelmode','auto')
 set(gcf,'color','w')
 
 end
@@ -111,8 +115,8 @@ violin(dist_cell'               , ...
     'mc', [], ...
     'medc', [], 'bw', 0.02);
 
-xlabel('Release size')
-ylabel('Maximum drive frequency')
+xlabel('Organisms released')
+ylabel('Peak drive')
 set(gca,'box','off')
 set(gca,'tickdir','out')
 set(gca,'ticklength',[0.1, 0.1])

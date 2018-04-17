@@ -1,6 +1,7 @@
 function [ ] = gen_figure_1D( )
 
 addpath(genpath('Plotting Utilities'))
+addpath(genpath('Simulation Functions'))
 
 % Run 1000 simulations for each of three different scenarios:
 %   P = 0.15
