@@ -154,5 +154,7 @@ xlabel('Time (generations)')
 ylabel('Allele frequency')
 set(gca,'ticklength',[0.025 0.025])
 set(gca,'XMinorTick','on','YMinorTick','on')
+set(gca,'xticklabelmode','auto')
+set(gca,'yticklabelmode','auto')
 
 end
