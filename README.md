@@ -1,3 +1,7 @@
+
+
+### This code is associated with the paper from Noble et al., "Current CRISPR gene drive systems are likely to be highly invasive in wild populations". eLife, 2018. http://dx.doi.org/10.7554/eLife.33423
+
 ## Overview ##
 
 This repository contains and all of the code and data required to reproduce the figures presented in: C Noble, B Adlam, GM Church, KM Esvelt, MA Nowak, Current CRISPR gene drives systems are likely to be highly invasive in wild populations, bioRxiv (2017).
